@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "a8e1",
+      "username": "blairew",
+      "password": "iloveyou50*",
+      "fName": "Blaire",
+      "lName": "Waldof",
+      "email": "blairew@gmail.com"
+    },
+    {
+      "id": "e0f6",
+      "fName": "Hermione",
+      "lName": "Granger",
+      "username": "hermione",
+      "password": "ilove50*",
+      "email": "cool@gmail.com"
+    }
+  ]
+}
