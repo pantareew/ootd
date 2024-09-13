@@ -13,7 +13,7 @@ OOTD is a web application designed for fashion enthusiasts to share their daily 
 * Favorites: Save outfits you like to your favorites for later viewing through your profile page.
 
 ## Technologies Used
-Vue CLI: For building the frontend of the application.
-Bootstrap: To ensure a responsive and visually appealing user interface.
-PHP: For backend functionality and handling user requests.
-MariaDB: As the database for storing user and outfit information.
+* Vue CLI: For building the frontend of the application.
+* Bootstrap: To ensure a responsive and visually appealing user interface.
+* PHP: For backend functionality and handling user requests.
+* MariaDB: As the database for storing user and outfit information.
