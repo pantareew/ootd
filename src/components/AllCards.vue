@@ -11,6 +11,8 @@
           :heart="heart"
           :heartClicked="heartClicked"
           :authenticated="authenticated"
+          :user="user"
+          @favRemoved="handleFavRemoved"
         />
       </div>
     </div>
@@ -25,6 +27,10 @@ export default {
     OutfitCard,
   },
   props: {
+    user: {
+      type: Object,
+      required: true,
+    },
     outfits: {
       type: Array,
       required: true,
@@ -33,8 +39,13 @@ export default {
       type: Boolean,
       default: true,
     },
-    heartClicked: { type: Boolean },
+    heartClicked: { type: Boolean, required: true },
     authenticated: Boolean,
+  },
+  methods: {
+    handleFavRemoved() {
+      this.$emit("favRemoved");
+    },
   },
 };
 </script>

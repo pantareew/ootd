@@ -1,5 +1,5 @@
 <template>
-  <form class="my-4" @submit.prevent="putData" novalidate>
+  <form class="my-4" @submit.prevent="putData" novalidate ref="updateForm">
     <div class="mb-3">
       <label for="date" class="form-label">Date</label>
       <input
@@ -45,6 +45,12 @@ export default {
       errors: [],
     };
   },
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
   methods: {
     validateData() {
       this.errors = [];
@@ -56,12 +62,20 @@ export default {
       if (!this.desc) {
         this.errors.push("Please enter the outfit's description");
         valid = false;
+      } else if (this.desc.length < 10) {
+        this.errors.push("Outfit description must have at least 10 characters");
+        valid = false;
+      } else if (this.desc.length > 50) {
+        this.errors.push("Outfit description can't be more than 50 characters");
+        valid = false;
       }
       return valid;
     },
     putData() {
       if (this.validateData()) {
-        var putSQLApiURL = "resources/apis.php/date/" + this.date;
+        var putSQLApiURL = `/cos30043/s103837447/ootd/resources/myOutfit.php?date=${encodeURIComponent(
+          this.date
+        )}&username=${encodeURIComponent(this.user.username)}`;
 
         // POST request using fetch with error handling
         const requestOptions = {
@@ -70,18 +84,18 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            date: this.date,
             desc: this.desc,
           }),
         };
-
         fetch(putSQLApiURL, requestOptions)
           .then((response) => {
-            //turning the response into the usable data
             return response.json();
           })
-          .then(() => {
-            this.msg = "Successfully updated";
+          .then((data) => {
+            this.msg = data.message;
+            this.$emit("dataUpdated");
+            this.desc = "";
+            this.date = null;
           })
           .catch((error) => {
             this.msg = "Error: " + error;

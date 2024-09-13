@@ -1,16 +1,13 @@
 <?php
-
+include "./db_connection.php";
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'], '/'));
 $input = json_decode(file_get_contents('php://input'), true);  // json string to associative array(true)
 
-// connect to the mysql database
-$conn = mysqli_connect('feenix-mariadb.swin.edu.au', 's103837447', '241002', 's103837447_db');
 
 mysqli_set_charset($conn, 'utf8');
 
-// initialise the table name accordingly
 $table = "users";
 
 // retrieve the search key field name and value from the path

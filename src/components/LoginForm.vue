@@ -44,6 +44,7 @@ export default {
         password: "",
       },
       errors: [],
+      user: {},
     };
   },
   methods: {
@@ -86,7 +87,7 @@ export default {
             if (!data) {
               this.errors.push("username or password is incorrect");
             } else {
-              this.$emit("authenticated", { status: true, data });
+              this.$emit("authenticated", { status: true, user: data });
               this.$router.replace({
                 name: "profile",
                 params: { username: data.username },

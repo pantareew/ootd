@@ -1,5 +1,10 @@
 <template>
-  <form class="my-4" @submit.prevent="postData">
+  <form
+    ref="addForm"
+    class="my-4"
+    @submit.prevent="postData"
+    enctype="multipart/form-data"
+  >
     <div v-if="errors.length">
       <div class="alert alert-danger" role="alert">
         <p>Please correct the following error(s):</p>
@@ -15,6 +20,7 @@
         class="form-control"
         id="img"
         name="img"
+        ref="img"
         @change="validateImg"
         required
       />
@@ -48,6 +54,12 @@
 <script>
 export default {
   name: "AddData",
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       input: {
@@ -60,6 +72,7 @@ export default {
     };
   },
   methods: {
+    //only image file is allowed
     validateImg(event) {
       this.errors = [];
       const file = event.target.files[0];
@@ -70,11 +83,15 @@ export default {
         this.input.image = null;
       }
     },
+    //validation of the form
     checkForm() {
       this.errors = [];
       var valid = true;
       if (!this.input.desc) {
         this.errors.push(" Outfit description is required  ");
+        valid = false;
+      } else if (this.input.desc.length < 10) {
+        this.errors.push("Outfit description must have at least 10 characters");
         valid = false;
       } else if (this.input.desc.length > 50) {
         this.errors.push("Outfit description can't be more than 50 characters");
@@ -88,23 +105,30 @@ export default {
     },
     postData() {
       if (this.checkForm() && this.input.image) {
-        const requestOptions = {
+        const inputData = new FormData();
+        inputData.append("styler", this.user.username);
+        inputData.append("desc", this.input.desc);
+        inputData.append("date", this.input.date);
+        inputData.append("img", this.$refs.img.files[0]);
+
+        fetch("/cos30043/s103837447/ootd/resources/myOutfit.php/", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            desc: this.input.desc,
-            date: this.input.date,
-            image: this.input.image,
-          }),
-        };
-        fetch("backend/apis.php/", requestOptions)
+          body: inputData,
+        })
           .then((res) => {
             return res.json();
           })
-          .then(() => {
-            this.msg = "The outfit is successfully added";
+          .then((data) => {
+            if (data.success) {
+              this.$emit("dataAdded");
+              this.msg = "The outfit is successfully added";
+              this.input.desc = "";
+              this.input.date = null;
+              this.input.image = null;
+              this.$refs.img = null;
+            } else {
+              this.msg = data.message;
+            }
           })
           .catch((err) => {
             this.msg = "Error:" + err;

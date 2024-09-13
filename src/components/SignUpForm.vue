@@ -1,6 +1,6 @@
 <template>
   <div class="row d-flex">
-    <div class="col-6">
+    <div class="col-md-7 col-lg-6">
       <form ref="form" @submit.prevent="signup" novalidate>
         <div class="mb-3">
           <label for="fName" class="form-label">First Name</label>
@@ -158,16 +158,20 @@ export default {
     },
     signup() {
       if (this.checkForm()) {
-        // check if the username already exists
-        fetch("http://localhost:3000/users")
-          .then((res) => res.json())
-          .then((users) => {
-            const existingUser = users.find(
-              (user) => user.username === this.input.userName
-            );
-            if (existingUser) {
+        const getSQLApiURL = `resources/addUser.php?username=${encodeURIComponent(
+          this.input.userName
+        )}`;
+
+        //check if the username already exists
+        fetch(getSQLApiURL, { method: "GET" })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (data.length > 0) {
               this.errors.push("Username already exists");
             } else {
+              const postSQLApiURL = "resources/addUser.php";
               const requestOptions = {
                 method: "POST",
                 headers: {
@@ -181,8 +185,8 @@ export default {
                   email: this.input.email,
                 }),
               };
-
-              fetch("http://localhost:3000/users", requestOptions)
+              //add input to db
+              fetch(postSQLApiURL, requestOptions)
                 .then((res) => {
                   return res.json();
                 })
@@ -191,7 +195,7 @@ export default {
                   this.$refs.form.reset();
                 })
                 .catch((err) => {
-                  this.errors.push("Error:" + err);
+                  this.errors.push("Error: " + err.message);
                 });
             }
           });

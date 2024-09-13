@@ -19,6 +19,12 @@
 <script>
 export default {
   name: "DelData",
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       date: null,
@@ -28,22 +34,24 @@ export default {
   methods: {
     submitDel() {
       if (this.date) {
-        var delSQLApiURL = "resources/apis.php/date/" + this.date;
+        var delSQLApiURL = `/cos30043/s103837447/ootd/resources/myOutfit.php?date=${encodeURIComponent(
+          this.date
+        )}&username=${encodeURIComponent(this.user.username)}`;
+
         const requestOptions = {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            date: this.date,
-          }),
         };
         fetch(delSQLApiURL, requestOptions)
           .then((response) => {
             return response.json();
           })
-          .then(() => {
-            this.msg = "Data deleted successfully";
+          .then((data) => {
+            this.msg = data.message;
+            this.$emit("dataDeleted");
+            this.date = null;
           })
           .catch((error) => {
             this.msg = "Error: " + error;

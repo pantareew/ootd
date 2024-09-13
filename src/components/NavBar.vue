@@ -1,14 +1,13 @@
 <template>
-  <nav class="navbar bg-white shadow d-flex justify-content-between px-5 py-2">
+  <nav
+    class="navbar bg-white shadow d-flex justify-content-between px-md-5 px-2 py-2"
+  >
+    <!--Logo-->
     <router-link to="/"
       ><img alt="OOTD logo" src="@/assets/logo.png"
     /></router-link>
 
-    <div class="d-flex align-items-center w-50">
-      <span class="mdi mdi-magnify searchIcon"></span>
-      <input type="text" class="form-control searchBox" placeholder="Search" />
-    </div>
-
+    <!--Button-->
     <div class="button">
       <router-link to="/login" v-if="!authenticated"
         ><button class="btn btn-dark" type="button">
@@ -46,29 +45,3 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.searchBox {
-  background-color: #d9d9d9;
-  border: 1px solid black;
-  border-radius: 0 12px 12px 0;
-  border-left: none;
-}
-.searchBox::placeholder {
-  color: #acaaaa;
-}
-.searchBox:focus {
-  box-shadow: none;
-  background-color: #d9d9d9;
-  border: 1px solid black;
-  border-left: none;
-}
-.searchIcon {
-  font-size: 22px;
-  background-color: #d9d9d9;
-  border: 1px solid black;
-  border-radius: 12px 0 0 12px;
-  border-right: none;
-  padding: 0 10px;
-}
-</style>

@@ -6,12 +6,12 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col-10 col-sm-6 col-xl-4">
         <LoginForm @authenticated="setAuthenticated" />
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4 my-4">
+      <div class="col-10 col-sm-6 col-xl-4 my-4">
         <h6>
           Don't have an account with us?
           <router-link
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-4 text-center">
+      <div class="text-center">
         <router-link to="/">
           <img src="@/assets/logo.png" alt="OOTD Logo"
         /></router-link>
