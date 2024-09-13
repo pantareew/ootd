@@ -16,4 +16,4 @@ OOTD is a web application designed for fashion enthusiasts to share their daily 
 * Vue CLI: For building the frontend of the application.
 * Bootstrap: To ensure a responsive and visually appealing user interface.
 * PHP: For backend functionality and handling user requests.
-* MariaDB: As the database for storing user and outfit information.
+* MySQL: As the database for storing user and outfit information.
