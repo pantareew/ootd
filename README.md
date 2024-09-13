@@ -5,12 +5,12 @@ OOTD is a web application designed for fashion enthusiasts to share their daily 
 
 ## Features
 ### For Visitors:
-Browse a diverse collection of outfits shared by registered members.
-Gain inspiration for outfit ideas from the latest trends and styles.
+* Browse a diverse collection of outfits shared by registered members.
+* Gain inspiration for outfit ideas from the latest trends and styles.
 ### For Registered Members:
-Account Management: Access a personal account management page after logging in.
-Outfit Sharing: Add, edit, and delete outfits to showcase your daily looks.
-Favorites: Save outfits you like to your favorites for later viewing through your profile page.
+* Account Management: Access a personal account management page after logging in.
+* Outfit Sharing: Add, edit, and delete outfits to showcase your daily looks.
+* Favorites: Save outfits you like to your favorites for later viewing through your profile page.
 
 ## Technologies Used
 Vue CLI: For building the frontend of the application.
