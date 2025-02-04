@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "serve -s dist"
+    "start": "serve -s dist",
+    "heroku-postbuild": "npm run build && cp -R dist/* public/"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
@@ -14,6 +15,7 @@
     "core-js": "^3.8.3",
     "json-server": "^1.0.0-beta.0",
     "roboto-fontface": "*",
+    "serve": "^14.2.4",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
     "vuejs-paginate-next": "^1.0.2",

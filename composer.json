@@ -1,0 +1,8 @@
+{
+    "name": "pantareew/ootd",
+    "description": "Outfit Of The Day",
+    "require": {
+      "php": ">=7.4"
+    }
+  }
+  
