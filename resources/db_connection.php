@@ -1,18 +1,20 @@
 <?php
 
-//load .env file
-$env = parse_ini_file(__DIR__ . "/.env");
+//load db url
+$cleardb_url = getenv("JAWSDB_URL");
 
-//check for .env 
-if (!$env) {
-    die("Failed to load .env file.");
+if (!$cleardb_url) {
+    die("Error: No database URL found.");
 }
 
-//get data from .env file
-$servername = $env['DB_SERVER'];
-$username = $env['DB_USERNAME'];
-$password = $env['DB_PASSWORD'];
-$database = $env['DB_DATABASE'];
+// Parse the JawsDB URL
+$cleardb_config = parse_url($cleardb_url);
+
+//get database credentials
+$servername = $cleardb_config["host"];
+$username = $cleardb_config["user"];
+$password = $cleardb_config["pass"];
+$database = substr($cleardb_config["path"], 1);
 
 //create connection
 $conn = mysqli_connect($servername, $username, $password, $database);
